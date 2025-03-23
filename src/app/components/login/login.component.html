@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3>Sign In</h3>
+        <p>Please fill your information to sign in</p>
+        <div class="card-body">
+          <form formValidate #loginForm="ngForm" (ngSubmit)="signIn(loginForm)" autocomplete="off">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" [(ngModel)]="loginModel.email" name="Email" required minlength="12">
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="form-group mt-2 position-relative">
+              <label>Password</label>
+              <input type="password" #password class="form-control" [(ngModel)]="loginModel.password" name="Password" required>
+              <div class="invalid-feedback"></div>
+                <i class="fa-solid eye fa-eye{{password.type === 'password' ? '' : '-slash'}}" (click)="showOrHidePassword()"></i>
+            </div>
+            <div class="form-group mt-2">
+              <button class="btn btn-dark w-100">
+                <i class="fa-solid fa-lock me-1"></i>
+                Giriş Yap
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
