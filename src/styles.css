@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 350;
+  font-style: normal;
+}
+
+
+body {
+  background-color: rgb(66, 66, 66);
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search {
+  color: #555555;
+  position: absolute;
+  top: 11px;
+  left: 25px;
+}
+
+input[type="search"] {
+  padding-left: 35px;
+}
