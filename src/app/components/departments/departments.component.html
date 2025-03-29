@@ -1,10 +1,10 @@
 <div class="mt-2 d-flex justify-content-between align-items-center">
-  <h3 class="text-white">Doctors Page</h3>
+  <h3 class="text-white">Departments Page</h3>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
       <li class="breadcrumb-item active">
-        <a routerLink="/doctors">Doctors</a>
+        <a routerLink="/departments">Departments</a>
       </li>
       <li class="breadcrumb-item">Add</li>
     </ol>
@@ -15,9 +15,9 @@
   <div class="form-group">
     <div class="row">
       <div class="col-xl-9 col-lg-8 col-md-6 col-sm-12 col-12">
-        <button data-bs-toggle="modal" data-bs-target="#createModal"  class="btn btn-dark">
+        <button data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-dark" class="btn btn-dark">
           <i class="fa-solid fa-plus me-2"></i>
-          <span>Add Doctor</span>
+          <span>Add Department</span>
         </button>
       </div>
 
@@ -27,7 +27,7 @@
         <input
           type="search"
           class="form-control"
-          placeholder="Search doctor..."
+          placeholder="Search department..."
           [(ngModel)]="search"
         />
         <i class="fa-solid fa-magnifying-glass search"></i>
@@ -40,22 +40,20 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Full Name</th>
-          <th>Department</th>
+          <th>Name</th>
           <th>Operations</th>
         </tr>
       </thead>
       <tbody>
-        @for (doctor of doctors | doctor : search; track doctor) {
+        @for (department of departments | department : search; track department) {
         <tr>
           <td>{{$index + 1}}</td>
-          <td>{{doctor.fullName}}</td>
-          <td>{{doctor.department.name}}</td>
+          <td>{{department.name}}</td>
           <td>
-            <button (click)="get(doctor)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Update">
+            <button class="btn btn-sm btn-outline-primary me-1" title="Update">
               <i class="fa-solid fa-edit"></i>
             </button>
-            <button (click)="delete(doctor.id, doctor.fullName)" class="btn btn-sm btn-outline-danger" title="Delete">
+            <button class="btn btn-sm btn-outline-danger" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -73,30 +71,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="createModalLabel">Create Doctor Form</h5>
+        <h5 class="modal-title" id="createModalLabel">Create Department Form</h5>
         <button type="button" #createModalCloseButton class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
       <div class="modal-body">
         <form #createForm="ngForm" formValidate autocomplete="off" (ngSubmit)="create(createForm)">
           <div class="form-group">
-            <label>First Name</label>
-            <input type="text" [(ngModel)]="createModel.firstName" name="firstName" class="form-control" required minlength="3">
-            <div class="invalid-feedback"></div>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" [(ngModel)]="createModel.lastName" name="lastName" class="form-control" required minlength="3">
-            <div class="invalid-feedback"></div>
-          </div>
-          <div class="form-group">
-            <label>Department</label>
-            <select class="form-control" [(ngModel)]="createModel.departmentId" name="department" required>
-              <option value="0">Select...</option>
-              <option *ngFor="let department of departments" [value]="department.id">
-                {{ department.name }}
-              </option>
-            </select>
+            <label>Name</label>
+            <input type="text" [(ngModel)]="createModel.name" name="name" class="form-control" required minlength="3">
             <div class="invalid-feedback"></div>
           </div>
           <div class="modal-footer">
@@ -113,30 +96,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateModalLabel">Update Doctor Form</h5>
+        <h5 class="modal-title" id="updateModalLabel">Update Department Form</h5>
         <button type="button" #updateModalCloseButton class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
       <div class="modal-body">
         <form #updateForm="ngForm" formValidate autocomplete="off" (ngSubmit)="update(updateForm)">
           <div class="form-group">
-            <label>First Name</label>
-            <input type="text" [(ngModel)]="updateModel.firstName" name="firstName" class="form-control" required minlength="3">
-            <div class="invalid-feedback"></div>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" [(ngModel)]="updateModel.lastName" name="lastName" class="form-control" required minlength="3">
-            <div class="invalid-feedback"></div>
-          </div>
-          <div class="form-group">
-            <label>Department</label>
-            <select class="form-control" [(ngModel)]="updateModel.departmentId" name="department" required>
-              <option value="0">Select...</option>
-              <option *ngFor="let department of departments" [value]="department.id">
-                {{ department.name }}
-              </option>
-            </select>
+            <label>Name</label>
+            <input type="text" [(ngModel)]="updateModel.name" name="name" class="form-control" required minlength="3">
             <div class="invalid-feedback"></div>
           </div>
           <div class="modal-footer">

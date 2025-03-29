@@ -5,7 +5,8 @@ import { FormValidateDirective } from 'form-validate-angular';
 import { HttpService } from '../../services/http.service';
 import { LoginResponseModel } from '../../models/login-response.model';
 import { Router } from '@angular/router';
-import { loginAction } from '../../constants/urlconstants';
+import { loginAction, tokenKey } from '../../constants/urlconstants';
+import { ResultModel } from '../../models/result.model';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginComponent {
   signIn(form:NgForm) {
     if(form.valid) {
       this.http.post<LoginResponseModel>(loginAction, this.loginModel, (res) => {
-          localStorage.setItem("key", res.data!.token);
+          localStorage.setItem(tokenKey, res.data.token);
           this.router.navigateByUrl("/");
       })
     }

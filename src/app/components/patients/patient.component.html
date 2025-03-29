@@ -1,10 +1,10 @@
 <div class="mt-2 d-flex justify-content-between align-items-center">
-  <h3 class="text-white">Doctors Page</h3>
+  <h3 class="text-white">Patients Page</h3>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
       <li class="breadcrumb-item active">
-        <a routerLink="/doctors">Doctors</a>
+        <a routerLink="/patients">Patients</a>
       </li>
       <li class="breadcrumb-item">Add</li>
     </ol>
@@ -17,7 +17,7 @@
       <div class="col-xl-9 col-lg-8 col-md-6 col-sm-12 col-12">
         <button data-bs-toggle="modal" data-bs-target="#createModal"  class="btn btn-dark">
           <i class="fa-solid fa-plus me-2"></i>
-          <span>Add Doctor</span>
+          <span>Add Patient</span>
         </button>
       </div>
 
@@ -27,7 +27,7 @@
         <input
           type="search"
           class="form-control"
-          placeholder="Search doctor..."
+          placeholder="Search patient..."
           [(ngModel)]="search"
         />
         <i class="fa-solid fa-magnifying-glass search"></i>
@@ -41,21 +41,23 @@
         <tr>
           <th>#</th>
           <th>Full Name</th>
-          <th>Department</th>
+          <th>City / Town</th>
+          <th>Full Address</th>
           <th>Operations</th>
         </tr>
       </thead>
       <tbody>
-        @for (doctor of doctors | doctor : search; track doctor) {
+        @for (patient of patients | patient : search; track patient) {
         <tr>
           <td>{{$index + 1}}</td>
-          <td>{{doctor.fullName}}</td>
-          <td>{{doctor.department.name}}</td>
+          <td>{{patient.fullName}}</td>
+          <td>{{patient.city}} / {{patient.town}}</td>
+          <td>{{patient.fullAddress}}</td>
           <td>
-            <button (click)="get(doctor)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Update">
+            <button (click)="get(patient)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Update">
               <i class="fa-solid fa-edit"></i>
             </button>
-            <button (click)="delete(doctor.id, doctor.fullName)" class="btn btn-sm btn-outline-danger" title="Delete">
+            <button (click)="delete(patient.id.toString(), patient.fullName)" class="btn btn-sm btn-outline-danger" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -73,7 +75,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="createModalLabel">Create Doctor Form</h5>
+        <h5 class="modal-title" id="createModalLabel">Create Patient Form</h5>
         <button type="button" #createModalCloseButton class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
@@ -90,13 +92,23 @@
             <div class="invalid-feedback"></div>
           </div>
           <div class="form-group">
-            <label>Department</label>
-            <select class="form-control" [(ngModel)]="createModel.departmentId" name="department" required>
-              <option value="0">Select...</option>
-              <option *ngFor="let department of departments" [value]="department.id">
-                {{ department.name }}
-              </option>
-            </select>
+            <label>Identity Number</label>
+            <input type="text" [(ngModel)]="createModel.identityNumber" name="identityNumber" class="form-control" required minlength="11" maxlength="11">
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" [(ngModel)]="createModel.city" name="city" class="form-control" required minlength="3">
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <label>Town</label>
+            <input type="text" [(ngModel)]="createModel.town" name="town" class="form-control" required minlength="3">
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <label>Full Address</label>
+            <textarea type="text" [(ngModel)]="createModel.fullAddress" name="fullAddress" class="form-control" required minlength="3" ></textarea>
             <div class="invalid-feedback"></div>
           </div>
           <div class="modal-footer">
@@ -113,7 +125,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateModalLabel">Update Doctor Form</h5>
+        <h5 class="modal-title" id="updateModalLabel">Update Patient Form</h5>
         <button type="button" #updateModalCloseButton class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
@@ -130,13 +142,23 @@
             <div class="invalid-feedback"></div>
           </div>
           <div class="form-group">
-            <label>Department</label>
-            <select class="form-control" [(ngModel)]="updateModel.departmentId" name="department" required>
-              <option value="0">Select...</option>
-              <option *ngFor="let department of departments" [value]="department.id">
-                {{ department.name }}
-              </option>
-            </select>
+            <label>Identity Number</label>
+            <input type="text" [(ngModel)]="updateModel.identityNumber" name="identityNumber" class="form-control" required minlength="11" maxlength="11">
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" [(ngModel)]="updateModel.city" name="city" class="form-control" required minlength="3">
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <label>Town</label>
+            <input type="text" [(ngModel)]="updateModel.town" name="town" class="form-control" required minlength="3">
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <label>Full Address</label>
+            <textarea type="text" [(ngModel)]="updateModel.fullAddress" name="fullAddress" class="form-control" required minlength="3" ></textarea>
             <div class="invalid-feedback"></div>
           </div>
           <div class="modal-footer">

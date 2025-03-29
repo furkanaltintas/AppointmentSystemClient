@@ -8,17 +8,32 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/doctors">Doctors</a>
+          <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+        @if(hasRole(["Doctor"])) {
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/doctors" routerLinkActive="active">Doctors</a>
+        </li>
+      }
+        @if(hasRole(["Admin", "Doctor"])) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/patients" routerLinkActive="active">Patients</a>
+          </li>
+        }
+        @if(hasRole(["Admin"])) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/departments" routerLinkActive="active">Departments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/patients">Patients</a>
+          <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
         </li>
+      }
       </ul>
     </div>
 
     <!-- Span ve Buton için navbar collapse sonrasında yerleştirilen div -->
     <div class="d-flex justify-content-end align-items-center">
-      <span class="text-white me-2">Furkan Altıntaş</span>
+      <span class="text-white me-2">{{auth.tokenDecode.name | titlecase}}</span>
       <button (click)="signOut()" class="btn btn-outline-danger">
         <i class="fa-solid fa-power-off"></i>
       </button>
